@@ -7,6 +7,7 @@ echo "first begin ..."
 
 #https://serveradmin.ru/centos-nastroyka-servera/
 #https://serveradmin.ru/nastroyka-seti-v-centos/
+
 yum install epel-release -y
 yum update -y
 
@@ -14,6 +15,7 @@ yum install wget -y
 yum install mc -y
 yum install net-tools -y
 yum install bind-utils -y
+
 # mcedit /etc/sysconfig/selinux
 #SELINUX=disabled
 # reboot
