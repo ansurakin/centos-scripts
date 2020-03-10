@@ -9,7 +9,7 @@ sed -i -e '$a\DB_SYSTEM=\x27mysql,pgsql\x27' /usr/local/vesta/conf/vesta.conf
 sed -i "s|service='postgresql'|service='postgresql-9.6'|g" /usr/local/vesta/bin/v-list-sys-services
 #Регистрируем базу в панели
 export VESTA=/usr/local/vesta/
-$VESTA/bin/v-add-database-host pgsql 127.0.0.1 postgres 12345678
-service apache2 restart
+#$VESTA/bin/v-add-database-host pgsql 127.0.0.1 postgres 12345678
+#service apache2 restart
 
 echo "vesta end"
