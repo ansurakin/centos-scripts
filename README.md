@@ -3,8 +3,10 @@
 Р”Р»СЏ Р·Р°РїСѓСЃРєР° РІС‹РїРѕР»РЅРёС‚Рµ:
 ```
 cd /opt/centos-scripts
-chmod +x ./prepare.sh
-# chmod +x ./install.sh
+chmod +x ./install.sh
 ./install.sh
 ```
-
+После установки перезапустить сервер
+```
+shutdown -r now
+```

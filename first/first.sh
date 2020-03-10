@@ -16,8 +16,4 @@ yum install mc -y
 yum install net-tools -y
 yum install bind-utils -y
 
-# mcedit /etc/sysconfig/selinux
-#SELINUX=disabled
-# reboot
-
 echo "first end"
