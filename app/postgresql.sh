@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://itdraft.ru/2018/06/07/ustanovka-postgresql-9-6-na-centos-7/
+#https://itdraft.ru/2018/06/07/ustanovka-postgresql-9-6-na-centos-7/
 echo "postgresql begin ..."
 
 cd /opt
