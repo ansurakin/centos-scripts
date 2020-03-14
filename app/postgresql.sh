@@ -20,4 +20,6 @@ systemctl restart postgresql-9.6
 #iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
 #systemctl reload iptables
 
+echo "Plesae, change password user postgres!"
+
 echo "postgresql end"
