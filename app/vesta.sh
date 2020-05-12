@@ -9,7 +9,7 @@ bash vst-install.sh --nginx yes --phpfpm yes --apache no --named yes --remi yes 
 VESTA_DIR=/usr/local/vesta
 sed -i -e '$a\DB_SYSTEM=\x27mysql,pgsql\x27' $VESTA_DIR/conf/vesta.conf
 sed -i "s|service='postgresql'|service='postgresql-9.6'|g" $VESTA_DIR/bin/v-list-sys-services
-#Регистрируем базу в панели
+#Р РµРіРёСЃС‚СЂРёСЂСѓРµРј Р±Р°Р·Сѓ РІ РїР°РЅРµР»Рё
 $VESTA_DIR/bin/v-add-database-host pgsql 127.0.0.1 postgres 12345678
 #service apache2 restart
 

@@ -1,16 +1,16 @@
 #!/bin/bash
-#заменить firewalld на iptables:
+#Р·Р°РјРµРЅРёС‚СЊ firewalld РЅР° iptables:
 systemctl disable firewalld
 systemctl stop firewalld
 yum install iptables-services -y
 systemctl start iptables
 systemctl start ip6tables
-#Автозапуск при включении:
+#РђРІС‚РѕР·Р°РїСѓСЃРє РїСЂРё РІРєР»СЋС‡РµРЅРёРё:
 systemctl enable iptables
 systemctl enable ip6tables
-#Для сохранения правил iptables после перезагрузки:
+#Р”Р»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РїСЂР°РІРёР» iptables РїРѕСЃР»Рµ РїРµСЂРµР·Р°РіСЂСѓР·РєРё:
 /sbin/iptables-save > /etc/sysconfig/iptables
 /sbin/ip6tables-save > /etc/sysconfig/ip6tables
-#Текущие правила находятся в файлах: /etc/sysconfig/iptables /etc/sysconfig/ip6tables
-#Перезапуск iptables (например, после совершения каких-либо изменений):
+#РўРµРєСѓС‰РёРµ РїСЂР°РІРёР»Р° РЅР°С…РѕРґСЏС‚СЃСЏ РІ С„Р°Р№Р»Р°С…: /etc/sysconfig/iptables /etc/sysconfig/ip6tables
+#РџРµСЂРµР·Р°РїСѓСЃРє iptables (РЅР°РїСЂРёРјРµСЂ, РїРѕСЃР»Рµ СЃРѕРІРµСЂС€РµРЅРёСЏ РєР°РєРёС…-Р»РёР±Рѕ РёР·РјРµРЅРµРЅРёР№):
 # systemctl restart iptables

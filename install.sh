@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "Статистика до"
+echo "РЎС‚Р°С‚РёСЃС‚РёРєР° РґРѕ"
 systemctl status firewalld
 systemctl status iptables
 
 
-#Установка
+#РЈСЃС‚Р°РЅРѕРІРєР°
 cd /opt/centos-scripts
 
 chmod +x ./first/first.sh
@@ -19,6 +19,6 @@ chmod +x ./app/java.sh
 ./app/java.sh
 
 
-echo "Статистика после"
+echo "РЎС‚Р°С‚РёСЃС‚РёРєР° РїРѕСЃР»Рµ"
 systemctl status firewalld
 systemctl status iptables

@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "first begin ..."
 
-#идем в директорию /etc/sysconfig/network-scripts и открываем на редактирование файл ifcfg-eth0
+#РёРґРµРј РІ РґРёСЂРµРєС‚РѕСЂРёСЋ /etc/sysconfig/network-scripts Рё РѕС‚РєСЂС‹РІР°РµРј РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р» ifcfg-eth0
 #DNS1="217.10.32.4"
 #systemctl restart network
 

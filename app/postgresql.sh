@@ -9,10 +9,10 @@ yum install postgresql96-server -y
 systemctl enable postgresql-9.6
 systemctl start postgresql-9.6
 
-#Включаем доступ
+#Р’РєР»СЋС‡Р°РµРј РґРѕСЃС‚СѓРї
 sed -i "s|#listen_addresses = 'localhost'|listen_addresses = '*'|g" /var/lib/pgsql/9.6/data/postgresql.conf
 sed -i "s|host    all             all             127.0.0.1/32            ident|host    all             all             0.0.0.0/0            md5|g" /var/lib/pgsql/9.6/data/pg_hba.conf
-#Отключаем доступ по IPv6
+#РћС‚РєР»СЋС‡Р°РµРј РґРѕСЃС‚СѓРї РїРѕ IPv6
 sed -i "s|host    all             all             ::1/128                 ident|#host    all             all             ::1/128                 ident|g" /var/lib/pgsql/9.6/data/pg_hba.conf
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password '12345678';"
 systemctl restart postgresql-9.6

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Сменить пароль postgres"
+echo "РЎРјРµРЅРёС‚СЊ РїР°СЂРѕР»СЊ postgres"
 
 

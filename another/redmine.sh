@@ -3,23 +3,23 @@
 #https://itdraft.ru/2019/12/10/ustanovka-redmine-4-0-5-nginx-postgresql-v-centos-7/
 echo "redmine begin ..."
 
-# èçìåíèòå âåðñèþ redmine, åñëè íóæíî / change redmine version number if need
+# Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚Ðµ Ð²ÐµÑ€ÑÐ¸ÑŽ redmine, ÐµÑÐ»Ð¸ Ð½ÑƒÐ¶Ð½Ð¾ / change redmine version number if need
 REDMINE_VERSION="4.0.5"
-# óñòàíîâèòå ÿçûê äëÿ redmine / set redmine language
+# ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ðµ ÑÐ·Ñ‹Ðº Ð´Ð»Ñ redmine / set redmine language
 REDMINE_LANGUAGE="ru"
-# Óñòàíàâëèâàåì rpm ïàêåò ñ ruby 
+# Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ rpm Ð¿Ð°ÐºÐµÑ‚ Ñ ruby 
 cd /tmp && wget https://github.com/feedforce/ruby-rpm/releases/download/2.7.0/ruby-2.7.0-1.el7.centos.x86_64.rpm
 yum install -y ruby-2.7.0-1.el7.centos.x86_64.rpm
 gem install bundler
-# Êà÷àåì redmine / Download redmine 
+# ÐšÐ°Ñ‡Ð°ÐµÐ¼ redmine / Download redmine 
 wget http://www.redmine.org/releases/redmine-$REDMINE_VERSION.tar.gz
 tar -xf redmine-$REDMINE_VERSION.tar.gz 
 mv redmine-$REDMINE_VERSION /opt/redmine
 cd /opt/redmine
-# Äîáàâëÿåì íîðìàëüíûé âåá-ñåðâåð puma / we'll use puma because webrick is sucks
+# Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð½Ð¾Ñ€Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð²ÐµÐ±-ÑÐµÑ€Ð²ÐµÑ€ puma / we'll use puma because webrick is sucks
 echo 'gem "puma"' > Gemfile.local
 
-#Ñîçäàåì ïîëüçîâàòåëÿ ÁÄ è ñàìó ÁÄ
+#Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð‘Ð” Ð¸ ÑÐ°Ð¼Ñƒ Ð‘Ð”
 sudo -u postgres psql -U postgres -d postgres -c "create user redmine;"
 sudo -u postgres psql -U postgres -d postgres -c "alter user redmine with password '12345678';"
 sudo -u postgres psql -U postgres -d postgres -c "CREATE DATABASE redmine WITH ENCODING='UTF8' OWNER=redmine;"
@@ -32,23 +32,23 @@ production:
   username: redmine
   password: 12345678
 EOL
-# óñòàíàâëèâàåì êîìïèëÿòîðû 
+# ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ‚Ð¾Ñ€Ñ‹ 
 yum groupinstall -y "Development tools"
 yum install -y ImageMagick ImageMagick-devel
 yum install -y sqlite sqlite-devel
 bundle install --without development test
-# Ãåíåðèðóåì òîêåí äëÿ ñåññèè 
+# Ð“ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼ Ñ‚Ð¾ÐºÐµÐ½ Ð´Ð»Ñ ÑÐµÑÑÐ¸Ð¸ 
 bundle exec rake generate_secret_token
 RAILS_ENV=production bundle exec rake db:migrate
 RAILS_ENV=production REDMINE_LANG=$REDMINE_LANGUAGE bundle exec rake redmine:load_default_data
-# Îòêðûâàåì 80 ïîðò äëÿ âåá-ñåðâåðà / open 80 port for web-server
+# ÐžÑ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ 80 Ð¿Ð¾Ñ€Ñ‚ Ð´Ð»Ñ Ð²ÐµÐ±-ÑÐµÑ€Ð²ÐµÑ€Ð° / open 80 port for web-server
 #firewall-cmd --permanent --add-service=http
 #firewall-cmd --reload
-# Íàñòðîéêà smtp / SMTP config - http://www.redmine.org/projects/redmine/wiki/EmailConfiguration#GMail-Google-Apps
+# ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° smtp / SMTP config - http://www.redmine.org/projects/redmine/wiki/EmailConfiguration#GMail-Google-Apps
 cp config/configuration.yml.example config/configuration.yml
-# Ïðîñòåéøàÿ îòïðàâêà ïèñåì ñ ëîêàëõîñòà / basic smtp config
+# ÐŸÑ€Ð¾ÑÑ‚ÐµÐ¹ÑˆÐ°Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ° Ð¿Ð¸ÑÐµÐ¼ Ñ Ð»Ð¾ÐºÐ°Ð»Ñ…Ð¾ÑÑ‚Ð° / basic smtp config
 sed -i 's/  email_delivery:/  email_delivery:\n    delivery_method: :async_smtp\n    smtp_settings:\n      address: "localhost"\n      port: 25/' config/configuration.yml 
-# Ñîçäàåì êîíôèãóðàöèþ äëÿ âåá-ñåðâåðà puma / Make puma web-server config
+# Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸ÑŽ Ð´Ð»Ñ Ð²ÐµÐ±-ÑÐµÑ€Ð²ÐµÑ€Ð° puma / Make puma web-server config
 cat > /opt/redmine/puma_config.rb << EOL
 #!/usr/bin/env puma
 directory '/opt/redmine'
@@ -59,7 +59,7 @@ environment 'production'
 bind 'tcp://0.0.0.0:80'
 EOL
 
-# Ñîçäàåì systemd service-ôàéë redmine äëÿ àâòîçàïóñêà / Make systemd service file for autostart redmine
+# Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ systemd service-Ñ„Ð°Ð¹Ð» redmine Ð´Ð»Ñ Ð°Ð²Ñ‚Ð¾Ð·Ð°Ð¿ÑƒÑÐºÐ° / Make systemd service file for autostart redmine
 cat > /etc/systemd/system/redmine.service << EOL
 [Unit]
 Description=Redmine on Puma web-server
