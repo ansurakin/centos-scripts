@@ -1,0 +1,17 @@
+[Unit]
+Description=JIRA Service
+After=network.target
+After=postgresql-9.6.service
+
+[Service]
+Type=forking
+User=jira
+Environment=JRE_HOME=/opt/java/jdk1.8.0/jre
+Environment=JIRA_HOME=/home/jira/application-data
+ExecStart=/opt/jira/bin/start-jira.sh
+ExecStop=/opt/jira/bin/stop-jira.sh
+ExecReload=/opt/jira/bin/stop-jira.sh | sleep 60 | /opt/jira/bin/start-jira.sh
+
+[Install]
+
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 #!/bin/bash
 #https://itdraft.ru/2018/06/07/ustanovka-postgresql-9-6-na-centos-7/
+#https://syncweb.ru/about/blog/ustanovka-i-nastrojka-confluence-na-sobstvennyj-server
 echo "postgresql begin ..."
 
 cd /opt
