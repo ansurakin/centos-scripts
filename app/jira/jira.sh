@@ -5,6 +5,7 @@
 #https://syncweb.ru/about/blog/ustanovka-i-nastrojka-confluence-na-sobstvennyj-server
 echo $BASH_SOURCE "begin ..."
 
+#version=8.5.4
 JIRA_INSTALLATION_DIR=/opt/jira
 JIRA_HOME_DIR=/home/jira/application-data
 

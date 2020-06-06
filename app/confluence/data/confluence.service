@@ -1,0 +1,16 @@
+[Unit]
+Description=Confluence Service
+After=network.target
+After=postgresql-9.6.service
+
+[Service]
+Type=forking
+User=confluence
+Environment=JRE_HOME=/opt/java/jdk1.8.0/jre
+ExecStart=/opt/confluence/bin/start-confluence.sh
+ExecStop=/opt/confluence/bin/stop-confluence.sh
+ExecReload=/opt/confluence/bin/stop-confluence.sh | sleep 60 | /opt/confluence/bin/start-confluence.sh
+
+[Install]
+
+WantedBy=multi-user.target
