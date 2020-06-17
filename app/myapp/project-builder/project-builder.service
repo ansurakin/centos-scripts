@@ -1,0 +1,14 @@
+[Unit]
+Description=Project Builder Service
+After=network.target
+
+[Service]
+User=root
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+ExecStart=/opt/java/jdk1.8.0/bin/java -jar /opt/myapp/project-builder/project-builder.jar --server.port=8082
+
+[Install]
+WantedBy=multi-user.target

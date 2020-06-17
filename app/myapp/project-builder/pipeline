@@ -1,0 +1,36 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('Build') {
+         steps {
+            git 'https://github.com/ansurakin/project-builder.git'
+            sh "mvn clean package"
+         }
+
+         post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+            success {
+              junit '**/target/surefire-reports/TEST-*.xml'
+              archiveArtifacts 'target/*.jar'
+            }
+         }
+      }
+
+      stage('Deploy') {
+         steps {
+            sh "sudo systemctl stop project-builder"
+            sh "yes | sudo cp /var/lib/jenkins/workspace/project-builder/target/project-builder-*.jar /opt/myapp/project-builder/project-builder.jar"
+         }
+      }
+
+      stage('Run') {
+         steps {
+            sh "sudo systemctl start project-builder"
+            sh "sudo systemctl status project-builder"
+         }
+      }
+
+   }
+}

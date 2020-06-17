@@ -1,0 +1,15 @@
+[Unit]
+Description=My Service Hello
+After=network.target
+
+[Service]
+User=root
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+ExecStart=/opt/java/jdk1.8.0/bin/java -jar /opt/myapp/hello/hello.jar --server.port=8081
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

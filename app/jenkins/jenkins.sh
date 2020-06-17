@@ -22,4 +22,9 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 #Просмотр логов Jenkins
 #tail -f /var/log/jenkins/jenkins.log
 
+#Добавить PATH из echo $PATH в http://192.168.0.21:9081/configure
+#добавить папку, где будут собираться файлы
+
 echo $BASH_SOURCE "end"
+
+#yes | cp -rf /opt/install/centos-scripts/app/jenkins/jenkins /etc/sudoers.d
